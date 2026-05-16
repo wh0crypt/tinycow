@@ -12,7 +12,7 @@
 
 typedef struct
 {
-    char*   program[MAX_PROG_LEN];
+    char    program[MAX_PROG_LEN][4];
     size_t  len;
 } Program;
 
@@ -39,6 +39,7 @@ uint8_t get_op_from_str(char* str);
 Program create_prog_from_file(char* filename);
 void show_usage();
 void show_help();
+void free_program(Program* p);
 
 int main(int argc, char* argv[])
 {
@@ -54,7 +55,7 @@ int main(int argc, char* argv[])
         return 0;
     }
 
-    Program p = create_prog_from_file(argv[0]);
+    Program p = create_prog_from_file(argv[1]);
     if (p.len == 0)
     {
         fprintf(stderr, "error: program is empty\n");
@@ -101,7 +102,7 @@ void run(Program* program)
     int      dp         = 0;
     uint8_t  reg        = 0;
     uint8_t  reg_empty  = 1;
-    uint8_t  tape[MAX_PROG_LEN];
+    uint8_t  tape[MAX_PROG_LEN] = {0};
 
     while (pc < program->len)
     {
@@ -132,6 +133,7 @@ void run(Program* program)
             case IO_IF_ZERO:
                 if (tape[dp] == 0) tape[dp] = (uint8_t)getchar();
                 else putchar(tape[dp]);
+                ++pc;
                 break;
             case DEC:
                 --tape[dp]; ++pc;
@@ -188,19 +190,15 @@ uint8_t get_op_from_str(char* str)
 
 Program create_prog_from_file(char* filename)
 {
-    Program prog = {{""}, 0};
-
     FILE* fp = fopen(filename, "r");
     if (fp == NULL)
     {
         fprintf(stderr, "error: file '%s' cannot be opened.\n", filename);
-        return prog;
+        exit(1);
     }
 
-    char content[MAX_PROG_LEN];
-    fgets(content, MAX_PROG_LEN, fp);
-    memcpy(prog.program, content, strlen(content) * sizeof(char));
-    prog.len = strlen(content);
+    Program prog;
+    while (fscanf(fp, "%3s", prog.program[prog.len]) == 1 && prog.len < MAX_PROG_LEN) ++prog.len;
     return prog;
 }
 
