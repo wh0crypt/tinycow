@@ -36,10 +36,32 @@ enum
 
 void run(Program* program);
 uint8_t get_op_from_str(char* str);
+Program create_prog_from_file(char* filename);
+void show_usage();
+void show_help();
 
-
-int main()
+int main(int argc, char* argv[])
 {
+    if (argc < 2)
+    {
+        show_usage();
+        return 0;
+    }
+
+    if (!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help"))
+    {
+        printf("to be implemented\n"); // TODO: change to an actual help message
+        return 0;
+    }
+
+    Program p = create_prog_from_file(argv[0]);
+    if (p.len == 0)
+    {
+        fprintf(stderr, "error: program is empty\n");
+        return 1;
+    }
+
+    run(&p);
     return 0;
 }
 
@@ -101,7 +123,7 @@ void run(Program* program)
             case EXEC:
                 if (tape[dp] > READ_INT || tape[dp] == EXEC)
                 {
-                    fprintf(stderr, "error: invalid EXEC instruction '0x%02lx' at '0x%02lx'\n", tape[dp], pc);
+                    fprintf(stderr, "error: invalid EXEC instruction '0x%02x' at '0x%02x'\n", tape[dp], pc);
                     exit(1);
                 }
                 opcode = tape[dp];
@@ -162,5 +184,33 @@ uint8_t get_op_from_str(char* str)
     if (!strcmp(str, "OOM")) return PRINT_INT;
     if (!strcmp(str, "oom")) return READ_INT;
     return INV;
+}
+
+Program create_prog_from_file(char* filename)
+{
+    Program prog = {{""}, 0};
+
+    FILE* fp = fopen(filename, "r");
+    if (fp == NULL)
+    {
+        fprintf(stderr, "error: file '%s' cannot be opened.\n", filename);
+        return prog;
+    }
+
+    char content[MAX_PROG_LEN];
+    fgets(content, MAX_PROG_LEN, fp);
+    memcpy(prog.program, content, strlen(content) * sizeof(char));
+    prog.len = strlen(content);
+    return prog;
+}
+
+void show_usage()
+{
+    printf("Usage: tinycow [-h|--help] <FILE>\nTry 'tinycow --help' for more information.\n");
+}
+
+void show_help()
+{
+    // TODO: print an actual help message
 }
 
