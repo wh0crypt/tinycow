@@ -1,0 +1,40 @@
+/* Prints "Hello, world!" to the standard output linearly without jumps */
+
+/* H: 72 (Start at 0, add 72) */
+MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO Moo
+
+/* e: 101 (Current 72, add 29) */
+MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO Moo
+
+/* l: 108 (Current 101, add 7) */
+MoO MoO MoO MoO MoO MoO MoO Moo
+
+/* l: 108 (Current 108, add 0) */
+Moo
+
+/* o: 111 (Current 108, add 3) */
+MoO MoO MoO Moo
+
+/* ,: 44 (Current 111, subtract 67) */
+MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo Moo
+
+/* space: 32 (Current 44, subtract 12) */
+MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo Moo
+
+/* w: 119 (Current 32, add 87) */
+MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO MoO Moo
+
+/* o: 111 (Current 119, subtract 8) */
+MOo MOo MOo MOo MOo MOo MOo MOo Moo
+
+/* r: 114 (Current 111, add 3) */
+MoO MoO MoO Moo
+
+/* l: 108 (Current 114, subtract 6) */
+MOo MOo MOo MOo MOo MOo Moo
+
+/* d: 100 (Current 108, subtract 8) */
+MOo MOo MOo MOo MOo MOo MOo MOo Moo
+
+/* !: 33 (Current 100, subtract 67) */
+MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo MOo Moo
