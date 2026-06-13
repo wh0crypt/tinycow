@@ -131,38 +131,53 @@ Program* create_prog_from_file(char* filename)
         exit(1);
     }
 
+    size_t capacity = 1024;
     size_t len = 0;
-    char content[MAX_PROG_LEN][4];
-    while (fscanf(fp, "%3s", content[len]) == 1 && len < MAX_PROG_LEN) ++len;
-    fclose(fp);
 
     Program* p = malloc(sizeof(Program));
-    if (!p) return NULL;
-
-    p->program = malloc(len * sizeof(char*));
-    p->tape = calloc(TAPE_SIZE, sizeof(uint8_t));
-
-    if (!p->program || !p->tape)
+    if (!p)
     {
-        free_program(p);
+        fclose(fp);
         return NULL;
     }
 
-    for (size_t i = 0; i < len; ++i)
+    p->len = 0;
+    p->program = malloc(capacity * sizeof(char*));
+    p->tape = calloc(TAPE_SIZE, sizeof(uint8_t));
+    if (!p->program || !p->tape)
     {
-        p->program[i] = malloc(4);
-        if (!p->program[i])
-        {
-            for (size_t j = 0; j < i; ++j) free(p->program[j]);
-            free(p->program);
-            free(p->tape);
-            free(p);
-            return NULL;
-        }
-        memcpy(p->program[i], content[i], 4);
+        free_program(p);
+        fclose(fp);
+        return NULL;
     }
 
-    p->len = len;
+    char buffer[4];
+    while (fscanf(fp, "%3s", buffer) == 1)
+    {
+        if (len >= capacity)
+        {
+            capacity *= 2;
+            char** new_program = realloc(p->program, capacity * sizeof(char*));
+            if (!new_program)
+            {
+                fprintf(stderr, "error: memory reallocation failed.\n");
+                free_program(p);
+                fclose(fp);
+                return NULL;
+            }
+            p->program = new_program;
+        }
+        p->program[len] = malloc(4);
+        if (!p->program[len])
+        {
+            free_program(p);
+            fclose(fp);
+            return NULL;
+        }
+        memcpy(p->program[len], buffer, 4);
+        p->len = ++len;
+    }
+    fclose(fp);
     p->reg_empty = 1;
     p->reg = 0;
     return p;

@@ -1,7 +1,6 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
-#define MAX_PROG_LEN 4096
 #define TAPE_SIZE 30000
 
 
