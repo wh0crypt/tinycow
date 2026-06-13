@@ -82,7 +82,6 @@ To display help information:
 
 - Complete the loop block implementation for `moo` (`JUMP_START`) and `MOO` (`JUMP_IF_ZERO`).
 - Add dynamic memory management for the program tape to remove the 4096 instruction limit.
-- Implement a fully detailed CLI help menu.
 
 ## License
 
